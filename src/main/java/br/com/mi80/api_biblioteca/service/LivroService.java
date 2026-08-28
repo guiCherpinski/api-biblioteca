@@ -25,4 +25,12 @@ public class LivroService {
         List<LivroResponse> response = mapper.toResponseList(livros);
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<LivroResponse> buscarPorId(Long id) {
+        Livro entity = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("ERRO - ESSE ID NÃO EXISTE"));
+
+        LivroResponse response = mapper.toResponse(entity);
+        return ResponseEntity.ok(response);
+    }
 }
