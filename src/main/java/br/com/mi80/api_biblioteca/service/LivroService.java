@@ -2,6 +2,7 @@ package br.com.mi80.api_biblioteca.service;
 
 import br.com.mi80.api_biblioteca.LivroRepository;
 import br.com.mi80.api_biblioteca.dto.LivroResponse;
+import br.com.mi80.api_biblioteca.entity.Genero;
 import br.com.mi80.api_biblioteca.entity.Livro;
 import br.com.mi80.api_biblioteca.mapper.LivroMapper;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,13 @@ public class LivroService {
                 .orElseThrow(() -> new IllegalArgumentException("ERRO - ESSE ID NÃO EXISTE"));
 
         LivroResponse response = mapper.toResponse(entity);
+        return ResponseEntity.ok(response);
+    }
+
+    public ResponseEntity<List<LivroResponse>> listarPorGenero(Genero genero) {
+        List<Livro> entity = repository.findByGenero(genero);
+
+        List<LivroResponse> response = mapper.toResponseList(entity);
         return ResponseEntity.ok(response);
     }
 }

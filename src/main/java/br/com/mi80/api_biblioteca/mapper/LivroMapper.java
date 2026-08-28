@@ -15,6 +15,7 @@ public class LivroMapper {
                 .titulo(request.titulo())
                 .autor(request.autor())
                 .anoLancamento(request.anoLancamento())
+                .genero(request.genero())
                 .build();
     }
 
@@ -24,7 +25,8 @@ public class LivroMapper {
                 livro.getDescricao(),
                 livro.getTitulo(),
                 livro.getAutor(),
-                livro.getAnoLancamento()
+                livro.getAnoLancamento(),
+                livro.getGenero()
         );
     }
 
