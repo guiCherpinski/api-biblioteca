@@ -41,4 +41,11 @@ public class LivroService {
         List<LivroResponse> response = mapper.toResponseList(entity);
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<List<LivroResponse>> listarPorAutor(String autor) {
+        List<Livro> entity = repository.findByAutor(autor);
+
+        List<LivroResponse> response = mapper.toResponseList(entity);
+        return ResponseEntity.ok(response);
+    }
 }

@@ -33,4 +33,9 @@ public class LivroController {
     public ResponseEntity<List<LivroResponse>> buscarLivroDescricao(@RequestParam Genero genero) {
         return service.listarPorGenero(genero);
     }
+
+    @GetMapping("/autor")
+    public ResponseEntity<List<LivroResponse>> buscarPorAutor(@RequestParam String autor) {
+        return service.listarPorAutor(autor);
+    }
 }

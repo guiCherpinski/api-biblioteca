@@ -4,7 +4,7 @@ import br.com.mi80.api_biblioteca.entity.Genero;
 
 import java.time.Year;
 
-public record LivroCreateRequest<genero>(
+public record LivroCreateRequest(
         String descricao,
         String titulo,
         String autor,
