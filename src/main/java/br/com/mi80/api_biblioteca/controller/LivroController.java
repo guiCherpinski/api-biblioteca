@@ -1,12 +1,16 @@
 package br.com.mi80.api_biblioteca.controller;
 
+import br.com.mi80.api_biblioteca.dto.LivroCreateRequest;
 import br.com.mi80.api_biblioteca.dto.LivroResponse;
 import br.com.mi80.api_biblioteca.entity.Genero;
+import br.com.mi80.api_biblioteca.entity.Livro;
 import br.com.mi80.api_biblioteca.service.LivroService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -37,5 +41,17 @@ public class LivroController {
     @GetMapping("/autor")
     public ResponseEntity<List<LivroResponse>> buscarPorAutor(@RequestParam String autor) {
         return service.listarPorAutor(autor);
+    }
+
+    @PostMapping()
+    public ResponseEntity<LivroResponse> cadastrarLivro(@RequestBody @Valid LivroCreateRequest create) {
+        LivroResponse response = service.cadastrarLivro(create);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(response.id())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(response);
     }
 }

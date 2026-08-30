@@ -1,6 +1,7 @@
 package br.com.mi80.api_biblioteca.service;
 
 import br.com.mi80.api_biblioteca.LivroRepository;
+import br.com.mi80.api_biblioteca.dto.LivroCreateRequest;
 import br.com.mi80.api_biblioteca.dto.LivroResponse;
 import br.com.mi80.api_biblioteca.entity.Genero;
 import br.com.mi80.api_biblioteca.entity.Livro;
@@ -47,5 +48,12 @@ public class LivroService {
 
         List<LivroResponse> response = mapper.toResponseList(entity);
         return ResponseEntity.ok(response);
+    }
+
+    public LivroResponse cadastrarLivro(LivroCreateRequest create) {
+        Livro entity = mapper.toEntity(create);
+        Livro entitySaved = repository.save(entity);
+
+        return mapper.toResponse(entitySaved);
     }
 }
