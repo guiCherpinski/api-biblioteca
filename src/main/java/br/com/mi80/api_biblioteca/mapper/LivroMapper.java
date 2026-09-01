@@ -39,5 +39,6 @@ public class LivroMapper {
         livro.setDescricao(update.descricao());
         livro.setTitulo(update.titulo());
         livro.setAutor(update.autor());
+        livro.setGenero(update.genero());
     }
 }
