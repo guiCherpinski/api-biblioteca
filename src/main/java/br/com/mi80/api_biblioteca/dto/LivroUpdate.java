@@ -1,4 +1,9 @@
 package br.com.mi80.api_biblioteca.dto;
 
-public class LivroUpdate {
+public record LivroUpdate(
+        String descricao,
+        String titulo,
+        String autor
+) {
+
 }
