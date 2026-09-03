@@ -5,6 +5,7 @@ import br.com.mi80.api_biblioteca.dto.LivroCreateRequest;
 import br.com.mi80.api_biblioteca.dto.LivroResponse;
 import br.com.mi80.api_biblioteca.entity.Genero;
 import br.com.mi80.api_biblioteca.entity.Livro;
+import br.com.mi80.api_biblioteca.exception.LivroNaoEncontradoException;
 import br.com.mi80.api_biblioteca.mapper.LivroMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,10 @@ public class LivroService {
         Livro entitySaved = repository.save(entity);
 
         return mapper.toResponse(entitySaved);
+    }
+
+    public void deletarLivro(Long id){
+        Livro busca = repository.findById(id).orElseThrow(() -> new LivroNaoEncontradoException("livro não encontrado"));
+        repository.deleteById(id);
     }
 }
