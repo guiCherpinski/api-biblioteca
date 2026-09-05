@@ -31,7 +31,7 @@ public class LivroService {
 
     public ResponseEntity<LivroResponse> buscarPorId(Long id) {
         Livro entity = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("ERRO - ESSE ID NÃO EXISTE"));
+                .orElseThrow(() -> new LivroNaoEncontradoException("ERRO - ESSE ID NÃO EXISTE"));
 
         LivroResponse response = mapper.toResponse(entity);
         return ResponseEntity.ok(response);
@@ -61,5 +61,10 @@ public class LivroService {
     public void deletarLivro(Long id){
         Livro busca = repository.findById(id).orElseThrow(() -> new LivroNaoEncontradoException("livro não encontrado"));
         repository.deleteById(id);
+    }
+
+    public void deletarLivroAutor(String autor){
+        List<Livro> busca = repository.findByAutor(autor);
+        repository.deleteAll(busca);
     }
 }

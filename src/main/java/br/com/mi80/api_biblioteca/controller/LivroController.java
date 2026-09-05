@@ -59,4 +59,9 @@ public class LivroController {
     public void deletarLivro (@PathVariable Long id){
         service.deletarLivro(id);
     }
+
+    @DeleteMapping("/autor")
+    public void deletarLivro(@PathVariable String autor){
+        service.deletarLivroAutor(autor);
+    }
 }
